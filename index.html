@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Osito con Corazones — Dedicado para ti 💝</title>
+  <style>
+    /* =====================
+       Reset & Variables
+       ===================== */
+    :root{
+      --bg-1:#0f1020;
+      --bg-2:#1a1b3a;
+      --bg-3:#2a2356;
+      --pink:#ff6aa2;
+      --rose:#ff89b5;
+      --hot:#ff3a7e;
+      --heart:#ff4d88;
+      --heart-2:#ff98c2;
+      --glow: 0 0 20px rgba(255, 105, 180,.35);
+      --card:#141429cc;
+      --text:#fef6fb;
+      --sub:#ffd6ea;
+      --accent:#ffd1dc;
+      --bear:#8b5e3c;
+      --bear-dark:#6d4528;
+      --bear-light:#bc8a5a;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+
+    /* =====================
+       Scene
+       ===================== */
+    body{
+      font-family: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Color Emoji", "Apple Color Emoji", sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 800px at 20% 10%, #1a1030 0%, transparent 60%),
+                  radial-gradient(1000px 600px at 80% 0%, #291040 0%, transparent 65%),
+                  linear-gradient(160deg,var(--bg-1),var(--bg-2) 50%, var(--bg-3));
+      overflow:hidden;
+    }
+
+    .wrap{
+      position:relative;
+      min-height:100%;
+      display:grid;
+      place-items:center;
+      padding:40px 16px;
+    }
+
+    .card{
+      position:relative;
+      width:min(920px, 92vw);
+      border-radius:28px;
+      background:linear-gradient(180deg, #191932cc, #0f0f20b8), var(--card);
+      backdrop-filter: blur(10px);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow: 0 30px 90px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.04);
+      padding: clamp(18px, 4vw, 28px);
+      overflow:hidden;
+    }
+
+    .header{
+      text-align:center;
+      padding-top:6px;
+      padding-bottom:10px;
+    }
+    h1{
+      font-size:clamp(24px, 4.2vw, 42px);
+      font-weight:800;
+      letter-spacing:.5px;
+      line-height:1.1;
+      text-shadow:0 2px 0 rgba(0,0,0,.25), 0 18px 35px rgba(255,105,180,.18);
+    }
+    .sub{
+      margin-top:6px;
+      font-size:clamp(12px, 2.2vw, 16px);
+      color:var(--sub);
+      opacity:.95;
+    }
+
+    /* =====================
+       Heart Rain (CSS only)
+       ===================== */
+    .rain{
+      position:absolute;
+      inset:0;
+      overflow:hidden;
+      pointer-events:none;
+      z-index:0;
+    }
+    .rain span{
+      position:absolute;
+      top:-10vh;
+      font-size:clamp(14px, 2.2vw, 26px);
+      filter: drop-shadow(0 0 8px rgba(255, 105, 180,.35));
+      animation: fall linear infinite;
+      will-change: transform, opacity;
+    }
+    .rain span:nth-child(odd){
+      color:var(--heart);
+    }
+    .rain span:nth-child(even){
+      color:var(--heart-2);
+      opacity:.9;
+    }
+    @keyframes fall{
+      0%{transform: translateY(-12vh) translateX(0) rotate(0); opacity:0}
+      10%{opacity:1}
+      100%{transform: translateY(120vh) translateX(10px) rotate(360deg); opacity:0}
+    }
+
+    /* Randomize positions & delays */
+    /* 24 hearts with different seeds */
+    /* You can add more if you want more "lluvia" */
+    .rain span{left:50%}
+    .rain span:nth-child(1){left:5%; animation-duration:7.8s; animation-delay:.2s}
+    .rain span:nth-child(2){left:12%; animation-duration:8.6s; animation-delay:1.1s}
+    .rain span:nth-child(3){left:18%; animation-duration:7.2s; animation-delay:.6s}
+    .rain span:nth-child(4){left:25%; animation-duration:9.2s; animation-delay:1.7s}
+    .rain span:nth-child(5){left:31%; animation-duration:7.9s; animation-delay:.9s}
+    .rain span:nth-child(6){left:38%; animation-duration:8.8s; animation-delay:1.4s}
+    .rain span:nth-child(7){left:44%; animation-duration:7.1s; animation-delay:.3s}
+    .rain span:nth-child(8){left:50%; animation-duration:8.4s; animation-delay:1.9s}
+    .rain span:nth-child(9){left:56%; animation-duration:7.4s; animation-delay:.8s}
+    .rain span:nth-child(10){left:62%; animation-duration:9.0s; animation-delay:1.5s}
+    .rain span:nth-child(11){left:68%; animation-duration:7.6s; animation-delay:.4s}
+    .rain span:nth-child(12){left:74%; animation-duration:8.3s; animation-delay:1.2s}
+    .rain span:nth-child(13){left:80%; animation-duration:7.3s; animation-delay:.7s}
+    .rain span:nth-child(14){left:86%; animation-duration:9.4s; animation-delay:1.8s}
+    .rain span:nth-child(15){left:92%; animation-duration:7.7s; animation-delay:.1s}
+    .rain span:nth-child(16){left:10%; animation-duration:8.1s; animation-delay:1.3s}
+    .rain span:nth-child(17){left:22%; animation-duration:7.5s; animation-delay:.5s}
+    .rain span:nth-child(18){left:34%; animation-duration:9.1s; animation-delay:1.6s}
+    .rain span:nth-child(19){left:46%; animation-duration:8.7s; animation-delay:1.0s}
+    .rain span:nth-child(20){left:58%; animation-duration:7.0s; animation-delay:.2s}
+    .rain span:nth-child(21){left:70%; animation-duration:8.9s; animation-delay:1.4s}
+    .rain span:nth-child(22){left:82%; animation-duration:7.2s; animation-delay:.6s}
+    .rain span:nth-child(23){left:94%; animation-duration:8.5s; animation-delay:1.1s}
+    .rain span:nth-child(24){left:2%; animation-duration:9.3s; animation-delay:1.9s}
+
+    /* =====================
+       Layout grid
+       ===================== */
+    .grid{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: clamp(16px, 3vw, 28px);
+      align-items:center;
+    }
+    @media (max-width: 860px){
+      .grid{grid-template-columns: 1fr; gap:22px}
+    }
+
+    /* =====================
+       Dedicatoria (editable sin JS)
+       ===================== */
+    .note{
+      padding: clamp(12px, 1.8vw, 16px);
+      border-radius:18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.025), 0 8px 24px rgba(0,0,0,.25);
+    }
+    .tag{
+      display:inline-block;
+      padding:.35rem .7rem;
+      border-radius:999px;
+      background: linear-gradient(180deg, var(--rose), var(--pink));
+      color:#220714;
+      font-weight:800;
+      letter-spacing:.3px;
+      margin-bottom:.65rem;
+      box-shadow: var(--glow);
+    }
+    .dedicacion{
+      font-size: clamp(18px, 2.4vw, 22px);
+      line-height:1.45;
+      color:var(--text);
+      text-wrap:balance;
+    }
+    .dedicacion[contenteditable="true"]{
+      outline:none;
+      border-bottom: 1px dashed rgba(255,255,255,.18);
+    }
+    .hint{
+      margin-top:.5rem;
+      font-size: clamp(12px, 1.8vw, 14px);
+      color:#ffdff0;
+      opacity:.8;
+    }
+
+    /* =====================
+       Pie con firma
+       ===================== */
+    .foot{
+      margin-top:14px;
+      display:flex; align-items:center; justify-content:flex-start; gap:10px;
+      font-size:clamp(12px, 1.6vw, 13px);
+      color:var(--accent);
+      opacity:.9;
+    }
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--rose);box-shadow:var(--glow)}
+
+    /* =====================
+       OSITO — SVG puro
+       ===================== */
+    .bear-holder{
+      display:grid; place-items:center;
+    }
+    svg{max-width:540px; width:100%; height:auto;}
+
+    /* Animaciones del osito */
+    .heart-big{ animation: pump 1.8s ease-in-out infinite; transform-origin:center; }
+    @keyframes pump{ 0%,100%{ transform:scale(1)} 50%{ transform:scale(1.06)} }
+    .shine{ animation: glow 2.6s ease-in-out infinite; filter: drop-shadow(0 0 12px rgba(255, 136, 180,.55)); }
+    @keyframes glow{ 0%,100%{ opacity:.8 } 50%{ opacity:1 } }
+    .eye-left, .eye-right{ animation: blink 5s ease-in-out infinite; transform-origin:center;}
+    @keyframes blink{ 0%,92%,100%{ transform:scaleY(1)} 94%,96%{ transform:scaleY(.15)} }
+    .ear{ animation: wobble 3.6s ease-in-out infinite; transform-origin:center; }
+    @keyframes wobble{ 0%,100%{ transform:rotate(0)} 50%{ transform:rotate(1.8deg)} }
+    .sparkle{ animation: floaty 4.4s ease-in-out infinite; }
+    @keyframes floaty{ 0%,100%{ transform:translateY(0)} 50%{ transform:translateY(-6px)} }
+
+    /* Botón de descarga (opcional visual, sin JS) */
+    .fake-btn{
+      margin-top:12px;
+      display:inline-block;
+      padding:.55rem .9rem;
+      border-radius:12px;
+      background:linear-gradient(180deg,#ff78b0,#ff4d88);
+      color:#2a0620; font-weight:800; letter-spacing:.3px;
+      box-shadow: 0 10px 24px rgba(255,77,136,.35);
+      user-select:none;
+    }
+    .fake-btn:active{ transform: translateY(1px) }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <!-- Lluvia de corazones -->
+      <div class="rain" aria-hidden="true">
+        <span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span>
+        <span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span>
+        <span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span>
+        <span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span>
+      </div>
+
+      <div class="header">
+        <h1>Osito con corazones 💗</h1>
+        <p class="sub" contenteditable="true" spellcheck="false" >"Un pequeño mensaje de amor"</p>
+      </div>
+
+      <div class="grid">
+        <!-- Texto de dedicatoria -->
+        <div class="note">
+          <span class="tag">💌 Dedicatoria</span>
+          <p class="dedicacion" contenteditable="true" spellcheck="false">
+            Para ti, que haces que todo valga la pena. Gracias por tu sonrisa, por tu luz y por existir. 💖
+          </p>
+          <p class="hint" contenteditable="true" spellcheck="false">Haz clic en el texto para editar tu mensaje. (No requiere JavaScript)
+          </p>
+          <div class="foot" contenteditable="true" spellcheck="false"><span class="dot"></span> Consejo: imprime pantalla o guarda como PDF para compartirlo por chat.</div>
+        </div>
+
+        <!-- Ilustración del osito (SVG puro) -->
+        <div class="bear-holder">
+          <svg viewBox="0 0 600 520" role="img" aria-label="Osito tierno sosteniendo un corazón">
+            <defs>
+              <radialGradient id="gHeart" cx="50%" cy="40%" r="70%">
+                <stop offset="0%" stop-color="#ffb6d9"/>
+                <stop offset="60%" stop-color="#ff6aa2"/>
+                <stop offset="100%" stop-color="#ff3a7e"/>
+              </radialGradient>
+              <linearGradient id="gBear" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#9c6b43"/>
+                <stop offset="100%" stop-color="#764a2a"/>
+              </linearGradient>
+              <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#ff8fc2" flood-opacity="0.45"/>
+              </filter>
+            </defs>
+
+            <!-- Sombras de base -->
+            <ellipse cx="300" cy="480" rx="170" ry="22" fill="#000" opacity=".25"></ellipse>
+
+            <!-- Orejas -->
+            <g class="ear">
+              <circle cx="180" cy="120" r="56" fill="url(#gBear)"/>
+              <circle cx="420" cy="120" r="56" fill="url(#gBear)"/>
+              <circle cx="180" cy="120" r="34" fill="#d7a77b" opacity=".9"/>
+              <circle cx="420" cy="120" r="34" fill="#d7a77b" opacity=".9"/>
+            </g>
+
+            <!-- Cabeza -->
+            <g>
+              <circle cx="300" cy="200" r="120" fill="url(#gBear)"/>
+              <!-- Mejillas -->
+              <ellipse cx="240" cy="220" rx="22" ry="14" fill="#ff9fc5" opacity=".9"/>
+              <ellipse cx="360" cy="220" rx="22" ry="14" fill="#ff9fc5" opacity=".9"/>
+              <!-- Ojos -->
+              <ellipse class="eye-left"  cx="255" cy="200" rx="8" ry="10" fill="#2a0e05"/>
+              <ellipse class="eye-right" cx="345" cy="200" rx="8" ry="10" fill="#2a0e05"/>
+              <!-- Hocico -->
+              <ellipse cx="300" cy="236" rx="58" ry="40" fill="#d7a77b"/>
+              <circle cx="300" cy="228" r="10" fill="#2a0e05"/>
+              <path d="M290 244 q10 12 20 0" stroke="#2a0e05" stroke-width="4" fill="none" stroke-linecap="round"/>
+            </g>
+
+            <!-- Cuerpo -->
+            <g>
+              <ellipse cx="300" cy="360" rx="140" ry="120" fill="url(#gBear)"/>
+              <!-- Patitas -->
+              <ellipse cx="230" cy="440" rx="38" ry="30" fill="#d7a77b"/>
+              <ellipse cx="370" cy="440" rx="38" ry="30" fill="#d7a77b"/>
+            </g>
+
+            <!-- Corazón grande entre las manos -->
+            <g filter="url(#soft)">
+              <path class="heart-big" d="M300 320
+                c -46 -54 -140 -10 -110 56
+                c 26 56 110 86 110 86
+                s 84 -30 110 -86
+                c 30 -66 -64 -110 -110 -56z" fill="url(#gHeart)"/>
+              <!-- brillo -->
+              <circle class="shine" cx="270" cy="330" r="10" fill="#fff" opacity=".8"/>
+              <circle class="shine sparkle" cx="325" cy="350" r="6" fill="#fff" opacity=".9"/>
+            </g>
+
+            <!-- Brazos por encima del corazón -->
+            <g>
+              <path d="M188 330 q40 16 70 40 q-14 30 -36 36 q-38 -8 -52 -34 q-10 -28 18 -42z" fill="url(#gBear)"/>
+              <path d="M412 330 q-40 16 -70 40 q14 30 36 36 q38 -8 52 -34 q10 -28 -18 -42z" fill="url(#gBear)"/>
+            </g>
+
+            <!-- Estrellitas decorativas -->
+            <g opacity=".85">
+              <circle class="sparkle" cx="120" cy="120" r="3" fill="#ffd6ea"/>
+              <circle class="sparkle" cx="520" cy="110" r="2.5" fill="#ffd6ea"/>
+              <circle class="sparkle" cx="80" cy="220" r="2.5" fill="#ffd6ea"/>
+              <circle class="sparkle" cx="520" cy="230" r="3" fill="#ffd6ea"/>
+              <circle class="sparkle" cx="90" cy="380" r="2.2" fill="#ffd6ea"/>
+              <circle class="sparkle" cx="510" cy="380" r="2.2" fill="#ffd6ea"/>
+            </g>
+          </svg>
+          <a class="fake-btn" aria-disabled="true" contenteditable="true" spellcheck="false">💞 I love you "Nombre"</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
